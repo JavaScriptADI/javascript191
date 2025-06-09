@@ -16,7 +16,7 @@ const shopInventory = [
         price: 150,
     }
 ];
-let gold = 100
+let gold = 100;
 
 console.log(`We have ${shopInventory.length} items in our shop`);
 
