@@ -1,9 +1,10 @@
-function random(a, b) {
+function random(a = 0, b = 255) {
     return Math.floor((Math.random() * (b - a)) + a);
 }
 
 function getRandomColor() {
-    return `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`;
+    const color = random();
+    return `rgb(${color}, ${color}, ${color})`;
 }
 
 const spinach = document.querySelector(".spinach");
@@ -42,3 +43,4 @@ for (let i = 0; i < 1000; i++) {
     updateSpan(span);
     monitorDiv.appendChild(span);
 }
+

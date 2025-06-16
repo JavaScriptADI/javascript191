@@ -7,7 +7,12 @@ function getRandom(a, b) {
     return Math.floor((Math.random() * (b - a)) + a);
 }
 
-console.log(getRandom(0, 10) + getRandom(-10, 0));
+console.log(firstName);
+
+const num = getRandom(0, 10);
+console.log(num + num);
+console.log(getRandom(0, 10) + getRandom(0, 10));
 // console.log(console.log("hi"));
 // console.log(undefined + undefined);
+
 
