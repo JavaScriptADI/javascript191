@@ -1,4 +1,5 @@
-
+const productsDiv = document.querySelector("#products");
+const usersDiv = document.querySelector("#users")
 function createProductDiv(product) {
     const productDiv = document.createElement("div");
 
@@ -16,6 +17,23 @@ function createProductDiv(product) {
     return productDiv;
 }
 
+const createUserDiv = (user) => {
+    const div = document.createElement("div");
+
+    div.innerHTML = (`
+        <div class="mb-3 user rounded"
+            data-bs-toggle="popover" 
+            data-bs-placement="bottom"
+            data-bs-title="${user.email}"
+        >
+            <img src=${user.image} class="rounded rounded-circle" style="width: 24px; height: 24px"/>
+            <span>${user.username}</span>
+        </div>
+    `);
+
+    return div;
+};
+
 function loadProducts() {
     fetch("https://dummyjson.com/products")
         .then(
@@ -30,7 +48,7 @@ function loadProducts() {
         .then(
             function (data) {
                 for (const product of data.products) {
-                    document.body.appendChild(createProductDiv(product));
+                    productsDiv.appendChild(createProductDiv(product));
                 }
             },
             function (error) {
@@ -41,8 +59,20 @@ function loadProducts() {
 
 function loadUsers() {
     fetch('https://dummyjson.com/users')
-        .then(res => res.json())
-        .then(console.log);
+        // arrow functions
+        .then(res => res.json()) // this arrow function immediately return response.json()
+        .then((data) => {
+            // this arrow function has a body
+            console.log(data);
+            data.users.forEach((user) => {
+                usersDiv.appendChild(
+                    createUserDiv(user)
+                );
+            });
+            const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+            const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+        });
 }
 loadProducts();
 loadUsers();
+
